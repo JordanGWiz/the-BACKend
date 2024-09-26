@@ -5,27 +5,24 @@ const {
   createThoughts,
   updateThoughts,
   deleteThoughts,
-  createReaction,
   deleteReaction,
+  createReaction,
 } = require("../../controllers/thoughtsController.js");
 
-// Get all thoughts or create a new thought
-router
-  .route("/")
-  .get(getThoughts) 
-  .post(createThoughts); 
 
-//Get, update, or delete a specific thought
-router
-  .route("/:thoughtId")
-  .get(getSingleThought) 
-  .put(updateThoughts) 
-  .delete(deleteThoughts); 
+router.route("/").get(getThoughts).post(createThoughts);
 
-//Add or remove a reaction
+
 router
-  .route("/reactions/:reactionId")
-  .post(createReaction) 
-  .delete(deleteReaction); 
+  .route("/:thoughtsId")
+  .get(getSingleThought)
+  .put(updateThoughts)
+  .delete(deleteThoughts);
+
+
+router.route("/:thoughtsId/reactions/:reactionId").delete(deleteReaction);
+
+
+router.route("/:thoughtsId/reactions").post(createReaction);
 
 module.exports = router;
